@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block head_title %}Home{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-{{message.tags}}" role="alert">{{message}}</div>
+{% endfor %}
+{% endif %}
+
+
+
+
+<div class="container">
+    <div class="row">
+
+        <!-- Start Column 1 -->
+        <div class="col-12 col-md-4 col-lg-12 mb-5">
+            <div class="product-item" href="#">
+                <img src="{% if product.image %}{{product.image.url}}{% else %}https://via.placeholder.com/240x240x.jpg{% endif %}" class="img-fluid product-thumbnail">
+                <h3 class="product-title">{{ product.name }}</h3>
+                <strong class="product-price">&#8358;{{ product.price }}</strong>
+                <p>{{ product.description }}</p>
+
+            </div>
+            <br>
+            <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
+                <form action="{% url 'product' product.slug %}" method="post">
+                    {% csrf_token %}
+                    <input type="number" name="quantity" value="1" min="1" class="form-control text-center quantity-amount"
+                       >
+                    <br>
+                  
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Add to Cart</button>
+                    
+                </form>
+        
+            </div>
+        </div>
+        <!-- End Column 1 -->
+
+
+
+        
+            
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

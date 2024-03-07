@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block head_title %}Home{% endblock %}
+
+{% block content %}
+
+
+
+		<div class="untree_co-section before-footer-section">
+            <div class="container">
+              <div class="row mb-5">
+                <form class="col-md-12" method="post">
+                  <div class="site-blocks-table">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th class="product-thumbnail">Image</th>
+                          <th class="product-name">Product</th>
+                          <th class="product-price">Price</th>
+                          <th class="product-quantity">Quantity</th>
+                          <th class="product-total">Total</th>
+                          <th class="product-remove">Remove</th>
+                        </tr>
+                      </thead>
+					  {% if cart %}
+						{% for item in cart %}          
+							{% if item.product and item.product.slug %}	
+								<tbody>
+									<tr>
+									<td class="product-thumbnail" id="cart-item-{{ item.product.id }}">
+										<img src="{{ item.product.get_thumbnail }}" alt="Image" class="img-fluid">
+									</td>
+									<td class="product-name">
+										<h2 class="h5 text-black">{{ item.product.name }}</h2>
+									</td>
+									<td>&#8358;{{ item.product.price }}</td>
+									<td>
+										<div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
+										<div class="input-group-prepend">
+											<a href="{% url 'update_cart' item.product.id %}?action=decrement&quantity=1" class="btn btn-outline-black decrease">&minus;</a>
+										</div>
+										<input type="text" class="form-control text-center quantity-amount" value="{{ item.quantity }}" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+										<div class="input-group-append">
+											<a href="{% url 'update_cart' item.product.id %}?action=increment&quantity=1" class="btn btn-outline-black increase" type="button">&plus;</a>
+										</div>
+										</div>
+					
+									</td>
+									<td>&#8358;{{ item.total_price }}</td>
+									<td><a href="{% url 'update_cart' item.product.id %}?action=remove" class="btn btn-black btn-sm">X</a></td>
+									</tr>
+								</tbody>
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							<tbody>
+								<td class="product-name">
+									<h2 class="h5 text-black"><span>You do not have any product in your cart</span></h2>
+								</td>
+								
+							</tbody>
+						{% endif %}			  
+                    </table>
+                  </div>
+                </form>
+              </div>       
+              <div class="row">
+                <div class="col-md-6">
+                  
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label class="text-black h4" for="coupon">Coupon</label>
+                      <p>Enter your coupon code if you have one.</p>
+                    </div>
+                    <div class="col-md-8 mb-3 mb-md-0">
+                      <input type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">
+                    </div>
+                    <div class="col-md-4">
+                      <button class="btn btn-black">Apply Coupon</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 pl-5">
+                  <div class="row justify-content-end">
+                    <div class="col-md-7">
+                      <div class="row">
+                        <div class="col-md-12 text-right border-bottom mb-5">
+                          <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <div class="col-md-6">
+                          <span class="text-black">Subtotal</span>
+                        </div>
+                        <div class="col-md-6 text-right">
+                          <strong class="text-black">&#8358;{{ cart.get_total_cost }}</strong>
+                        </div>
+                      </div>
+                      <div class="row mb-5">
+                        <div class="col-md-6">
+                          <span class="text-black">Total</span>
+                        </div>
+                        <div class="col-md-6 text-right">
+                          <strong class="text-black">&#8358;{{ cart.get_total_cost }}</strong>
+                        </div>
+                      </div>
+        
+                      <div class="row">
+                        <div class="col-md-12">
+                          <a href="{% url 'start_order' %}" class="btn btn-black btn-lg py-3 btn-block">Proceed To Checkout</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+		
+
+{% endblock %}

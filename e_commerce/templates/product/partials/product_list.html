@@ -1,0 +1,28 @@
+{% load static %}
+
+
+
+
+
+<!-- 
+
+<a class="product-item" href="{% url 'product' product.slug %}">
+    <img src="{{ product.get_thumbnail }}" class="img-fluid product-thumbnail">
+</a>
+<h3 class="product-title">{{ product.name }}</h3>
+<strong class="product-price">${{ product.get_display_price }}</strong>
+<a href="{% url 'add_to_cart' product.id %}">
+    <span class="icon-cross">
+        <img src="{% static 'images/cross.svg' %}" class="img-fluid">
+    </span>
+</a> -->
+
+<a class="product-item" href="{% url 'add_to_cart' product.id %}">
+    <img src="{{ product.get_thumbnail }}" class="img-fluid product-thumbnail">
+    <h3 class="product-title">{{ product.name }}</h3>
+    <strong class="product-price">${{ product.get_display_price }}</strong>
+
+    <span class="icon-cross">
+        <img src="{% static 'images/cross.svg' %}" class="img-fluid">
+    </span>
+</a>

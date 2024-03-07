@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block head_title %}Shop{% endblock %}
+
+{% block content %}
+
+<div class="untree_co-section product-section before-footer-section">
+	<div class="container">
+		<div class="row">
+			<!-- Start Column 1 -->
+			{% for product in products %}
+				<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+					<a class="product-item" href="{% url 'add_to_cart' product.id %}">
+						<img src="{{ product.get_thumbnail }}" class="img-fluid product-thumbnail">
+						<h3 class="product-title">{{ product.name }}</h3>
+						<strong class="product-price">&#8358;{{ product.price }}</strong>
+					
+						<span class="icon-cross">
+							<img src="{% static 'images/cross.svg' %}" class="img-fluid">
+						</span>
+					</a>
+				</div> 
+			{% endfor %}
+			<!-- End Column 1 -->	
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
+
+
+
