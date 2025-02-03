@@ -12,7 +12,7 @@ class Cart(object):
         
         self.cart = cart
         # It first checks if there's an existing cart in the session.
-        #  If not, it creates an empty cart in the session. 
+        # If not, it creates an empty cart in the session. 
         # The cart is stored in the self.cart attribute for further use.
     
     def __iter__(self):
@@ -23,8 +23,7 @@ class Cart(object):
             item['total_price'] = int(item['product'].price * item['quantity'])
 
             yield item
-        #This method makes the Cart class iterable, 
-        # meaning you can loop through the items in the cart using a for loop.
+        #This method makes the Cart class iterable, meaning you can loop through the items in the cart using a for loop.
     
     def __len__(self):
         return sum(item['quantity'] for item in self.cart.values())
